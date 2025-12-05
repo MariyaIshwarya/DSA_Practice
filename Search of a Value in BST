@@ -1,0 +1,94 @@
+import java.util.Scanner;
+class Main {
+    public static class Node{
+        int data;
+        Node left, right;
+        Node(int data){
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
+    }
+    public static Node root = null;
+    
+    public static void append(int data){
+        Node newNode = new Node(data);
+        if(root == null){
+            root = newNode;
+            return;
+        }
+        Node temp = root;
+        while(true){
+            if(temp.data>newNode.data){
+                if(temp.left == null){
+                    temp.left = newNode;
+                    break;
+                }else{
+                    temp = temp.left;
+                }
+            }else{
+                if(temp.right == null){
+                    temp.right = newNode;
+                    break;
+                }else{
+                    temp = temp.right;
+                }
+            }
+        }
+    }
+    
+    public static void display(Node root){
+        if(root == null){
+            return;
+        }
+        display(root.left);
+        System.out.print(root.data+" ");
+        display(root.right);
+    }
+    
+    public static String isvaild(int key){
+        if(root == null){
+            return "Not Valid";
+        }else if(root.data == key){
+            return "valid";
+        }
+        Node temp = root;
+        while(temp.right != null || temp.left != null){
+            if(temp.data>key){
+                if(temp.left.data == key){
+                    return "Valid";
+                }else{
+                    temp = temp.left;
+                }
+            }else{
+                if(temp.right.data == key){
+                    return "Valid";
+                }else{
+                    temp = temp.right;
+                }
+            }
+        }
+        return "Not Valid";
+    }
+    
+    public static void main(String[] args) {
+        // System.out.println("Try programiz.pro");
+        Scanner sc  = new Scanner(System.in);
+        int data;
+        do{
+            data = sc.nextInt();
+            if(data>0){
+                append(data);
+            }
+        }while(data>0);
+        display(root);
+        int key;
+        System.out.println();
+        do{
+            key = sc.nextInt();
+            if(key>0){
+                System.out.println(isvaild(key));
+            }
+        }while(key>0);
+    }
+}
