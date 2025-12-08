@@ -1,0 +1,43 @@
+import java.util.Scanner;
+public class Main
+{
+    public static class Node {
+        int data;
+        Node next;
+    }
+    public static Node head = null;
+    public static Node tail = null;
+    public static int size = 0;
+    public static void enqueue(int data) {
+        Node newNode = new Node();
+        newNode.data = data;
+        newNode.next = null;
+        if(head==null) {
+            head = tail = newNode;
+        }
+        else {
+            tail.next = newNode;
+            tail = newNode;
+        }
+        size++;
+    }
+    public static void display(int k) {
+        Node temp = head;
+        for(int i=0; i<k; i++) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int data;
+		do {
+		    data = sc.nextInt();
+		    if(data > 0) {
+		        enqueue(data);
+		    }
+		} while(data > 0);
+		display(4);
+	}
+}
