@@ -1,0 +1,55 @@
+import java.util.Scanner;
+public class Main
+{
+       public static int n;
+       public static int[] queue;
+       public static int i=-1;
+       public static int j=-1;
+       public static void append(int data) {
+           if((j+1)%n == i) {
+               return;
+           }
+           j = (j+1) % n;
+           queue[j] = data;
+           if(i==-1) {
+               i++;
+           }
+       }
+       public static int delete() {
+           if(i==-1) {
+               return -1;
+           }
+            int val = queue[i];
+            if(i==j) {
+                i = -1;
+                j = -1;
+            }
+            else {
+                i = (i+1)%n; 
+            }
+            return val;
+       }
+       public static void display() {
+           int k = i;
+           while(true) {
+               System.out.print(queue[k] + " ");
+               
+               if(k==j) {
+                   break;
+               }
+               k = (k+1)%n;
+           }
+           System.out.println();
+       }
+    	public static void main(String[] args) {
+    		Scanner sc = new Scanner(System.in);
+    		n = sc.nextInt();
+    		queue = new int[n];
+    		int data;
+    		for(int i=0; i<n; i++) {
+    		    data = sc.nextInt();
+    		    append(data);
+    		}
+    		display();
+    	}
+}
